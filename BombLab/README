@@ -7,7 +7,6 @@ objdump -d 可执行文件名/.o目标文件
 
 gdb 可执行文件X           // 启动gdb
 quit/q                    // 退出gdb
-
 disas func                // 反汇编函数func，若没有参数，反汇编当前函数
 
 break 函数名func          // 在函数入口处设置断点(具体来说就是程序停在callq 0x.....<func>指令但还没执行callq， 下一步将压栈函数返回地址，进入函数
