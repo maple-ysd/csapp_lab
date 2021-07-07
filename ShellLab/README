@@ -1,0 +1,37 @@
+异常控制流
+
+中断，来自外部IO设备，返回到下一条指令
+陷阱，又称系统调用，比如fork、execve、exit， 返回到下一条指令
+故障，可能能够被修复，如缺页异常，或者返回到同一条指令，或者终止
+终止
+
+fork（）创建一个子进程，子进程返回，父进程返回子进程pid
+execve（char * filename，char **argv， char **envi）替换当前进程的代码、数据等
+waitpid(pid_t pid, int *statusp, int options)
+        pid 为正，等待该进程终止
+        pid为-1，等待父进程的所有子进程
+        status表示子进程的退出状态
+        options修改默认行为。默认行为：挂起调用进程的执行直到等待集合里的一个进程终止
+kill（pid_t pid, int sig)发送信号sig到进程（如果为正）， 发送信号sig到进程组|pid| 如果为负）
+
+信号处理：当从内核模式切换到用户模式时会检查未阻塞的信号，如果有就强制接收
+
+sigset_t mask_all, mask_one
+sigemptyset(&mask_one);
+sigaddset(&mask_one, SIG_CHLD);
+sigfillset(&mask_all);
+sigprocmask(int how, const sigset_t * set, sigset_t *oldset);
+
+注意在修改全局变量时要阻塞所有外部信号
+在父进程中添加子进程到子进程列表时，要提前阻塞子进程信号SIG_CHLD，避免子进程提前运行结束，然后父进程才将其加入，造成无效子进程一直存在与子进程列表的情况
+
+typedef void (*sighandler)(int)
+signal(int signum, sighandler_t handler),信号处理程序，修改默认行为
+
+shell lab
+
+做之前应简单浏览sdriver.py的内容，以便于理解trace输入（python语言本身可以忽略，简单浏览注释即可）
+/bin/echo ... 意味着输出后面的内容
+
+注意按照trace1--->16的顺序，老老实实做还能少走弯路
+详情见tsh.c即可
